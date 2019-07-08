@@ -14,7 +14,7 @@ typedef struct {
 
 BF BF_empty();
 
-void BF_add(char *data, int size, BF *b, int debug, int print);
+void BF_add(char *data, int size, BF *b, int print, int debug);
 
 int BF_query(char *data, int size, BF b, int print);
 

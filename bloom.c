@@ -8,7 +8,7 @@ BF BF_empty() {
 }
 
 /* Add more data to the filter */;
-void BF_add(char *data, int size, BF *b, int debug, int print) {
+void BF_add(char *data, int size, BF *b, int print, int debug) {
   uint32_t hash[_HASH_NUM+(4-(_HASH_NUM%4))];
   for(int i = 0; i < _HASH_NUM; i+=4)
     MurmurHash3_x64_128(data, size, i, &hash[i]);
@@ -47,14 +47,14 @@ void BF_debug_hash(uint32_t *hash) {
     int bit = hash[i]%(_FILTER_SIZE*8);
     int line = bit/64;
     int num = bit%64;
-    printf("Bit number %d on line %d of filter\n", num, line);
+    printf("Hash %d (%u)\t| Bit number %d on line %d of filter\n", i+1, hash[i], num, line);
   }
 }
 
 void BF_debug_filter(BF b) {
   printf("BEGIN FILTER\n");
   for(int i = 0; i < _FILTER_SIZE/8; i++) {
-    printf("%d  ", i);
+    printf("%d\t", i+1);
     print_binary(b.filter[i]);
   }
   printf("END FILTER\n");
@@ -70,16 +70,4 @@ void print_binary(uint64_t num) {
     }
   }
   printf("\n");
-}
-
-int main() {
-  BF b = BF_empty();
-  char* data = "a";
-  char* data2 = "aabab";
-  BF_query(data, 1, b, 1);
-  BF_add(data, 1, &b, 1, 1);
-  BF_query(data, 1, b, 1);
-  BF_query(data2, 5, b, 1);
-  BF_add(data2, 5, &b, 1, 1);
-  return 0;
 }
