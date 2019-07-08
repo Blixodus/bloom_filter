@@ -16,11 +16,11 @@ void interactive() {
     printf("> ");
     scanf("%s", instr);
     if(!strcmp(instr, "add")) {
-      scanf("%s %d", code, &len);
-      BF_add(code, len, &b, 1, debug);
+      scanf("%s", code);
+      BF_add(code, strlen(code), &b, 1, debug);
     } else if(!strcmp(instr, "query")) {
-      scanf("%s %d", code, &len);
-      BF_query(code, len, b, 1);
+      scanf("%s", code);
+      BF_query(code, strlen(code), b, 1);
     } else if(!strcmp(instr, "debug")) {
       debug = 1-debug;
       printf("Debug is now on state %d\n", debug);
