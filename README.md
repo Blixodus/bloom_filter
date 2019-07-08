@@ -1,2 +1,2 @@
-# bloom_filter
-Basic Bloom filter
+# A very basic Bloom filter
+
