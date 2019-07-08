@@ -6,7 +6,7 @@
 #include "murmur3.h"
 
 #define _FILTER_SIZE 128   //Size of bloom filter in BYTES
-#define _HASH_NUM 16       //Number of hash functions
+#define _HASH_NUM 19       //Number of hash functions
 
 typedef struct {
   uint64_t filter[_FILTER_SIZE/8];
@@ -14,9 +14,11 @@ typedef struct {
 
 BF BF_empty();
 
-void BF_add(char *data, BF *b);
+void BF_add(char *data, int size, BF *b, int debug, int print);
 
-//int BF_query(char *data, BF *b);
+int BF_query(char *data, int size, BF b, int print);
+
+void BF_debug_hash(uint32_t *hash);
 
 void BF_debug_filter(BF b);
 
